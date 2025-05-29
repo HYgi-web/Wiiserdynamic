@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clothify — Fresh & Sophisticated</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    body {
+      background-color: #f7f9fc;
+      color: #344055;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: #4e91a8;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #a18d6c;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 1.2rem 2rem;
+      box-shadow: 0 2px 8px rgba(52, 64, 85, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      
+      letter-spacing: 1px;
+      background: linear-gradient(45deg, #0e0d0d, #2196f3);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    nav li {
+      cursor: pointer;
+      position: relative;
+    }
+    nav li::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #a18d6c;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav li:hover::after {
+      width: 100%;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 3rem 2rem 2rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 3.5rem;
+      color: #4e91a8;
+      letter-spacing: 0.04em;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Force 3 columns by default */
+        gap: 2.5rem;
+      }
+      
+      @media (max-width: 1024px) {
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
+        }
+      }
+      
+      @media (max-width: 600px) {
+        .product-grid {
+          grid-template-columns: 1fr; /* Mobile: 1 column */
+        }
+      }
+      
+
+    .product {
+      background-color: #ffffff;
+      border-radius: 14px;
+      padding: 1.4rem 1.8rem 2.2rem;
+      box-shadow: 0 8px 16px rgba(65, 83, 105, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      color: #344055;
+      -webkit-user-select: none;      
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    .product::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(45deg, #2196f3, #20BEFF);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .product:hover::before {
+        transform: scaleX(1);
+    }
+
+    .product:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .product:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .product:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    .product img {
+      width: 180px;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(78, 145, 168, 0.2);
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+    }
+    .product:hover img {
+        transform: scale(1.05) rotate(2deg);
+    }
+   
+
+    .product h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #4e91a8;
+    }
+
+    .product p {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 1.3rem;
+      color: #a18d6c;
+    }
+
+    button {
+      background-color: #a18d6c;
+      border: none;
+      padding: 0.6rem 1.8rem;
+      border-radius: 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(161, 141, 108, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      -webkit-user-select: none;
+      user-select: none;
+
+    }
+    button:hover {
+      background-color: #4e91a8;
+      box-shadow: 0 6px 20px rgba(78, 145, 168, 0.6);
+    }
+
+    footer {
+      background-color: #f7f9fc;
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #8892a0;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      -webkit-user-select: none;     
+      user-select: none;
+      border-top: 1px solid #e0e6ed;
+      font-style: italic;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+      nav ul {
+        gap: 1rem;
+      }
+      h2 {
+        font-size: 2rem;
+        letter-spacing: 0.03em;
+      }
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+      .product img {
+        width: 140px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ThreeFIT</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="men.html">Men</a></li>
+        <li><a href="women.html">Women</a></li>
+        <li><a href="kids.html">Kids</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="products">
+      <h2>Fresh Finds</h2>
+      <div class="product-grid scroll-animate">
+        <div class="product" tabindex="0">
+          <img src="https://via.placeholder.com/200x250/7ca3b9/ffffff?text=Casual+T-shirt" alt="Casual T-shirt" />
+          <h3>Casual T-shirt</h3>
+          <p>$15.99</p>
+          <button onclick="addToCart('Casual T-shirt')">Add to Cart</button>
+        </div>
+        <div class="product" tabindex="0">
+          <img src="https://via.placeholder.com/200x250/9db4c0/ffffff?text=Blue+Jeans" alt="Blue Jeans" />
+          <h3>Blue Jeans</h3>
+          <p>$39.99</p>
+          <button onclick="addToCart('Blue Jeans')">Add to Cart</button>
+        </div>
+        <div class="product" tabindex="0">
+          <img src="https://via.placeholder.com/200x250/7ca3b9/ffffff?text=Leather+Jacket" alt="Leather Jacket" />
+          <h3>Leather Jacket</h3>
+          <p>$79.99</p>
+          <button onclick="addToCart('Leather Jacket')">Add to Cart</button>
+        </div>
+        <div class="product" tabindex="0">
+          <img src="https://via.placeholder.com/200x250/9db4c0/ffffff?text=Vintage+Sneakers" alt="Vintage Sneakers" />
+          <h3>Vintage Sneakers</h3>
+          <p>$49.99</p>
+          <button onclick="addToCart('Vintage Sneakers')">Add to Cart</button>
+        </div>
+        <div class="product" tabindex="0">
+            <img src="https://via.placeholder.com/200x250/9db4c0/ffffff?text=Vintage+Sneakers" alt="Cargo pants" />
+            <h3>Vintage Sneakers</h3>
+            <p>$49.99</p>
+            <button onclick="addToCart('Cargo Pants')">Add to Cart</button>
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 ThreeFIT. Elegant style, effortless vibe.
+  </footer>
+
+  <script>
+    // script.js
+
+function addToCart(productName, productPrice, productImage) {
+  // Retrieve existing cart from localStorage or initialize an empty array
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // Create a new product object
+  const newItem = {
+    name: productName,
+    price: productPrice,
+    image: productImage
+  };
+
+  // Add the new item to the cart array
+  cart.push(newItem);
+
+  // Save the updated cart back to localStorage
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  // Optional: Provide user feedback
+  alert(`${productName} has been added to your cart.`);
+}
+
+// Add typing effect to hero title
+function typeWriter(element, text, speed = 100) {
+    let i = 0;
+    element.innerHTML = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+/// Initialize typing effect after a delay
+setTimeout(() => {
+    const heroTitle = document.querySelector('header h1'); // updated selector
+    if (heroTitle) {
+        const originalText = heroTitle.textContent;
+        typeWriter(heroTitle, originalText, 60); // 60ms speed
+    }
+}, 1000); // 1 second delay
+
+
+  </script>
+  
+</body>
+</html>
