@@ -47,7 +47,7 @@
 }
 
 .dark-mode .hero h1 {
-    background: linear-gradient(45deg, #ffffff, #2196f3);
+    background: linear-gradient(45deg, #ffffff, #b1d2ec);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;}
